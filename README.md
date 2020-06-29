@@ -115,6 +115,7 @@ Perform database migrations
 
 - [Django](https://www.djangoproject.com/) - A high-level Python Web framework.
 - [PostgreSQL](https://www.postgresql.org/) -  A powerful, open source object-relational database system.
+- [Django REST Framework](https://www.django-rest-framework.org/) - a powerful and flexible toolkit for building Web APIs.
 
 ## Authors
 

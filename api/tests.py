@@ -1,8 +1,13 @@
 from django.test import TestCase
-from api.models import Topic, Entry
+from django.urls import reverse
+from rest_framework.test import APIClient
+from rest_framework import status
+
+from api.models import Entry, Topic
+from api.serializers import EntrySerializer, TopicSerializer
 
 
-class TopicTest(TestCase):
+class TopicModelTest(TestCase):
 
     def create_topic(self, name, description):
         return Topic.objects.create(name=name, description=description)
@@ -35,7 +40,7 @@ class TopicTest(TestCase):
         self.assertEqual(len(Topic.objects.all()), 2)
 
 
-class EntryTest(TestCase):
+class EntryModelTest(TestCase):
 
     def create_entry(self, name, content):
         topic = Topic.objects.create(
@@ -76,3 +81,32 @@ class EntryTest(TestCase):
 
         self.assertEqual(len(Entry.objects.all()), 2)
         self.assertEqual(len(Topic.objects.all()), 2)
+
+
+class NotelogAPITestCase(TestCase):
+    """Test module for Notelog API."""
+
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_api_root_exist(self):
+        response = self.client.get(reverse('api-root'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_can_get_empty_topic_list(self):
+        response = self.client.get(reverse('topic-list'))
+        topics = Topic.objects.all()
+        serializer = TopicSerializer(topics, many=True)
+
+        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
+
+    def test_can_get_empty_entry_list(self):
+        response = self.client.get(reverse('entry-list'))
+        entries = Entry.objects.all()
+        serializer = EntrySerializer(entries, many=True)
+
+        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
