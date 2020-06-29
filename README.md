@@ -5,6 +5,7 @@ A topic-based note-taking web application
 ## Summary
 
 - [Getting Started](#getting-started)
+- [Running the tests](#running-the-tests)
 - [Development Process](#development-process)
 - [Built With](#built-with)
 - [Authors](#authors)
@@ -62,6 +63,14 @@ After successful build, you receive in terminal something like this:
     web_1  | Django version 3.0.7, using settings 'app.settings'
     web_1  | Starting development server at http://0.0.0.0:8000/
     web_1  | Quit the server with CONTROL-C.
+
+## Running the tests
+
+To run tests inside a Docker container
+
+    $ docker-compose run --no-deps --rm web python manage.py test -v 2
+
+> Note: `-v 2` parameter is optional, just for logging improvement
 
 ## Development Process
 
