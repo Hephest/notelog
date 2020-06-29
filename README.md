@@ -33,6 +33,18 @@ Clone repository to your machine
 
     $ git clone https://github.com/Hephest/notelog.git
 
+Create `.env` file inside project root directory with needed data
+
+    DJANGO_SECRET_KEY = <YOUR_SECRET_KEY>
+
+    DB_NAME = <YOUR_DB_NAME>
+    DB_USER = <YOUR_DB_USER>
+    DB_PASSWORD = <YOUR_DB_PASSWORD>
+    DB_HOST = 'db'
+    DB_PORT = 5432
+
+> Standard `DB_HOST` is `db` and `DB_PORT` is `5432`. To change that, update your `docker-compose.yml`
+
 Run `docker-compose`
 
     $ docker-compose up
@@ -46,30 +58,40 @@ After successful build, you receive in terminal something like this:
     db_1   | PostgreSQL Database directory appears to contain a database; Skipping initialization
     db_1   | 
     db_1   | 2020-06-29 07:49:27.632 UTC [1] LOG:  starting PostgreSQL 12.3 (Debian 12.3-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
-    db_1   | 2020-06-29 07:49:27.632 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
-    db_1   | 2020-06-29 07:49:27.632 UTC [1] LOG:  listening on IPv6 address "::", port 5432
-    db_1   | 2020-06-29 07:49:27.644 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-    db_1   | 2020-06-29 07:49:27.690 UTC [26] LOG:  database system was shut down at 2020-06-29 07:28:18 UTC
-    db_1   | 2020-06-29 07:49:27.701 UTC [1] LOG:  database system is ready to accept connections
-    web_1  | Watching for file changes with StatReloader
-    web_1  | Performing system checks...
-    web_1  | 
-    web_1  | System check identified no issues (0 silenced).
-    web_1  | 
-    web_1  | You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
-    web_1  | Run 'python manage.py migrate' to apply them.
-    web_1  | June 29, 2020 - 07:49:29
+    ...
     web_1  | Django version 3.0.7, using settings 'app.settings'
     web_1  | Starting development server at http://0.0.0.0:8000/
     web_1  | Quit the server with CONTROL-C.
 
 ## Development Process
 
+### Environment
+
+> Note: do not use example data in production, make sure to change all data accordingly to your project!
+
+All security sensitive data will contains in `.env` file, located at project root.
+
+#### Example
+
+`.env` structure
+
+    # Django configuration
+    DJANGO_SECRET_KEY = 'lu5ien0giye&j1s#iby_89a1zx((9!32+-6@%d_54ll4b%tn+b'
+
+    # PostgreSQL database configuration
+    DB_NAME = 'postgres'
+    DB_USER = 'postgres'
+    DB_PASSWORD = 'postgres'
+    DB_HOST = 'db'
+    DB_PORT = 5432
+
+### Django
+
 To run Django administrative commands, use `docker-compose`
 
     sudo docker-compose run web <COMMAND>
 
-### Examples
+#### Examples
 
 Create a new app inside Django project
 
