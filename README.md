@@ -102,6 +102,10 @@ To run Django administrative commands, use `docker-compose`
 
 #### Examples
 
+Create a new superuser (admin)
+
+    sudo docker-compose run web python manage.py createsuperuser
+
 Create a new app inside Django project
 
     sudo docker-compose run web django-admin startapp <APP_NAME>
