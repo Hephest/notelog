@@ -98,28 +98,29 @@ All security sensitive data will contains in `.env` file, located at project roo
 
 To run Django administrative commands, use `docker-compose`
 
-    sudo docker-compose run web <COMMAND>
+    docker-compose run web python manage.py <COMMAND>
 
 #### Examples
 
 Create a new superuser (admin)
 
-    sudo docker-compose run web python manage.py createsuperuser
+    docker-compose run web python manage.py createsuperuser
 
 Create a new app inside Django project
 
-    sudo docker-compose run web django-admin startapp <APP_NAME>
+    docker-compose run web python manage.py startapp <APP_NAME>
 
 Perform database migrations
 
-    sudo docker-compose run web manage.py makemigrations
-    sudo docker-compose run web manage.py migrate
+    docker-compose run web python manage.py makemigrations
+    docker-compose run web python manage.py migrate
 
 ## Built With
 
 - [Django](https://www.djangoproject.com/) - A high-level Python Web framework.
 - [PostgreSQL](https://www.postgresql.org/) -  A powerful, open source object-relational database system.
 - [Django REST Framework](https://www.django-rest-framework.org/) - a powerful and flexible toolkit for building Web APIs.
+- [Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html) - A JSON Web Token authentication plugin for Django REST Framework.
 
 ## Authors
 
