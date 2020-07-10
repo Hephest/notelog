@@ -3,4 +3,4 @@ psycopg2
 djangorestframework
 drf-yasg
 django-cors-headers
-djangorestframework_simplejwt
+djangorestframework-simplejwt
