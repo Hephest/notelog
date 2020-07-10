@@ -14,7 +14,7 @@ schema_view = get_schema_view(
         description="API for topics and entry manage."
     ),
     public=False,
-    permission_classes=(permissions.AllowAny,),
+    permission_classes=(permissions.IsAuthenticatedOrReadOnly,),
 )
 
 router = routers.DefaultRouter()
@@ -23,7 +23,7 @@ router.register(r'topics', views.TopicViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     url(r'^swagger/$',
         schema_view.with_ui(
